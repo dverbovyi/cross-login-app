@@ -1,2 +1,3 @@
 # loopback-example
-loopback rest-connector example using Facebook Graph APi
+
+Integration with third-party Facebook Graph API using Loopback NodeJS Framework and loopback rest-connector
