@@ -17,4 +17,4 @@ API available on [http://localhost:8080/explorer](http://localhost:8080/explorer
   
 * Use Facebook API explorer to get access tokens https://developers.facebook.com/tools/explorer/
 
-Specify `user_photos` permission
+Specify `user_photos` permission for token
