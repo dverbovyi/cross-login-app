@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # loopback-example-database
 
 A tutorial for basic database related features.
@@ -249,3 +250,8 @@ Created: { email: 'bob.doe@ibm.com',
 ---
 
 [More LoopBack examples](https://github.com/strongloop/loopback-example)
+=======
+# loopback-example
+
+Integration with third-party Facebook Graph API using Loopback NodeJS Framework and loopback rest-connector
+>>>>>>> 3b5613ad5c37e0a5dc60ae472649b6a1a6a0847c
