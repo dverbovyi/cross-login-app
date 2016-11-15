@@ -15,6 +15,6 @@ Integration with third-party Facebook Graph API using Loopback NodeJS Framework 
   
 API available on [http://localhost:8080/explorer](http://localhost:8080/explorer)
   
-* Use Facebook API explorer to get access tokens https://developers.facebook.com/tools/explorer/
+* To get the facebook token use [Facebook API explorer](https://developers.facebook.com/tools/explorer/)
 
 Specify `user_photos` permission for token
