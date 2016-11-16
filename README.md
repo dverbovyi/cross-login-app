@@ -1,4 +1,4 @@
-# cross-login
+# cross-login-app
 Integration with third-parties (Facebook, Twitter) using Loopback NodeJS Framework and loopback rest-connector
 
 
