@@ -24,13 +24,14 @@
   },
   "files": {
     "loopback#static": {
-      "params": "$!../public"
+      "params": "$!../public/"
     }
   },
   "final": {
     "loopback#urlNotFound": {}
   },
   "final:after": {
+    "./middleware/client-redirect": {},
     "loopback#errorHandler": {}
   }
 }
