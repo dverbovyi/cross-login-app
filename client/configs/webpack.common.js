@@ -203,10 +203,10 @@ module.exports = function (options) {
        *
        * See: https://www.npmjs.com/package/copy-webpack-plugin
        */
-      // new CopyWebpackPlugin([{
-      //   from: 'src/environment.json',
-      //   to: METADATA.output
-      // }]),
+      new CopyWebpackPlugin([{
+        from: 'src/environment.json',
+        to: METADATA.output
+      }]),
 
 
       /*
