@@ -1,52 +1,56 @@
 import { LoginGuard } from './../../guards/login.guard';
-import { Component, OnInit, Injector } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { LoginAPIService } from '../../services';
 import { RouteService } from '../../../../common/services';
-import { ICredentials } from '../../interfaces';
+import { LoginAPIService } from '../../services';
+import { Unsubscriber } from '../../../../common/mixins/unsubscriber';
+import { AUTH_TYPES } from '../../../../common/consts/auth-types.const';
 
 @Component({
     selector: 'login',
     template: require('./login.tpl.html')
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent extends Unsubscriber {
+    private credentials: any = {};
+
     constructor(
-        private _loginAPIService: LoginAPIService,
+        private loginAPIService: LoginAPIService,
         private _router: Router,
         private _routerService: RouteService
-    ) { }
-
-    public ngOnInit() { }
-
-    private login(credentials: ICredentials): void {
-        this._loginAPIService
-            .login(credentials)
-            .then((res: any) => { console.log(res); })
-            .catch(this.redirectToMain.bind(this));
+    ) {
+        super();
     }
 
-    private loginWithFacebook(): void {
-        this._loginAPIService
-            .loginWithFaceBook()
-            .then((res) => {
-                this._routerService.navigateToProfile();
-            })
-            .catch(this.redirectToMain.bind(this));
+    public login(type: number): void {
+        console.log(this.credentials);
+        if (!this.credentials.password || !this.credentials.email)
+            return;
+
+        this._login(AUTH_TYPES.Built_In, this.credentials);
     }
 
-    private loginWithTwitter(): void {
-        alert('Sorry, currently we don\'t support it yet');
+    public loginWithFacebook(): void {
+        this._login(AUTH_TYPES.Facebook);
     }
 
-    private redirectToMain(): void {
-        this._router.navigate(['/']);
+    public loginWithTwitter(): void {
+        alert('Not implemented yet')
+        // this._login(AUTH_TYPES.Twitter);
     }
 
-    private logout(): void {
-        this._loginAPIService
-            .logout()
-            .then(this.redirectToMain.bind(this), this.redirectToMain.bind(this))
-            .catch(this.redirectToMain.bind(this));
+    private _login(authType: number, body?: any): void {
+        this.subscriptions.push(
+            this.loginAPIService
+                .login(authType, this.credentials)
+                .subscribe((res: any) => {
+                    this._routerService.navigateToProfile();
+                    console.log(res);
+                    
+                }, this.handleError.bind(this)));
+    }
+
+    private handleError(error: any): void {
+        console.error(error);
     }
 }

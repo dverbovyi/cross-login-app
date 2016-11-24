@@ -6,7 +6,15 @@ import { LoginModule } from '../login';
 import { ProfileModule } from '../profile';
 
 import { AppComponent, WelcomeComponent } from './components';
-import { UtilsService, ConfigService, RouteService, AuthService } from '../../common/services';
+import { 
+    UtilsService, 
+    ConfigService, 
+    RouteService, 
+    UserService, 
+    APIProvidersFactory, 
+    API_PROVIDERS
+} from '../../common/services';
+
 import { AuthGuard } from './../../common/guards';
 
 import { ENV_PROVIDERS } from './../../common/environment';
@@ -28,9 +36,11 @@ const AppRoutes: Routes = [
         UtilsService,
         ConfigService,
         RouteService,
-        AuthService,
+        UserService,
         AuthGuard,
-        ...ENV_PROVIDERS
+        APIProvidersFactory,
+        ...API_PROVIDERS.map((provider) => { return { provide: provider.name, useClass: provider}; }),
+        ...ENV_PROVIDERS,
     ],
     bootstrap: [AppComponent]
 })
@@ -38,7 +48,6 @@ export class AppModule {
     constructor() {
         FB.init({
             appId: '1120123638105090',
-            appSecret: 'f1d31882d88ce8f54c3491fa4777f642',
             xfbml: true,
             cookie: true,
             version: 'v2.8'

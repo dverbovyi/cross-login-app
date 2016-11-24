@@ -1,14 +1,14 @@
 <header>
-    <a routerLink="/">Logout</a>
+    <a (click)=logout()>Logout</a>
     <h3>Welcome {{userData.username}}</h3>
-    <img src="{{userData.picture}}" alt="user">
+    <img style="width: 50px" src="{{userData.avatar}}" alt="user">
 </header>
 
 <ul class="user-content">
-    <li *ngFor="let photo of userData.photos">
+    <li *ngFor="let record of userData.records">
         <figure>
-            <img src="{{photo.picture}}" alt="{{photo.id}}" width="140px">
-            <figcaption>{{photo.name}}</figcaption>
+            <img *ngIf="record.picture" src="{{record.picture}}" alt="{{record.title}}" width="140px">
+            <figcaption>{{record.title}}</figcaption>
         </figure>
     </li>
 </ul>

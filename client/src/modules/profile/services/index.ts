@@ -1,7 +1,9 @@
+import { ProfileResolver } from './profile-resolver';
+import { FeedResolver } from './feed-resolver';
 import { ProfileAPIService } from './profile-api.service';
-import { ProfileResolve } from './profile-resolve.service';
 
 export {
+    ProfileResolver,
     ProfileAPIService,
-    ProfileResolve
+    FeedResolver
 }

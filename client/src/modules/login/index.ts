@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { SharedModule } from '../shared';
 import { LoginComponent } from './components';
+
 import { LoginAPIService } from './services';
 
 const LoginRoutes: Routes = [
@@ -12,8 +13,8 @@ const LoginRoutes: Routes = [
 @NgModule({
     imports: [SharedModule, RouterModule.forChild(LoginRoutes)],
     declarations: [LoginComponent],
-    bootstrap: [LoginComponent],
-    providers: [LoginAPIService]
+    providers: [LoginAPIService],
+    bootstrap: [LoginComponent]
 })
 export class LoginModule {
     constructor() { }

@@ -9,7 +9,12 @@ export class RouteService {
         this._router.navigate(['/']);
     }
 
+    public navigateToLogin(): void {
+        this._router.navigate(['/login']);
+    }
+
     public navigateToProfile(): void {
+        console.log('navigateToProfile')
         this._router.navigate(['/profile']);
     }
 }

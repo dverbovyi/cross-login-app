@@ -1,36 +1,31 @@
-import { Injectable, Injector } from '@angular/core';
-import { Http, URLSearchParams } from '@angular/http';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-import { UtilsService, APIService, ConfigService, AuthService } from '../../../common/services';
+import { APIProvidersFactory, UserService } from '../../../common/services';
 
 @Injectable()
-export class ProfileAPIService extends APIService {
+export class ProfileAPIService {
     constructor(
-        protected configService: ConfigService,
-        protected http: Http,
-        protected utilsService: UtilsService,
-        protected injector: Injector,
-        private _authService: AuthService
-    ) {
-        super(configService, http, utilsService, injector);
-    }
+        private apiProvidersFactory: APIProvidersFactory,
+        private userService: UserService
+    ) { }
 
     public getUser(): Observable<any> {
-        const params: URLSearchParams = new URLSearchParams(),
-            url: string = this.getUrl('/profile');
+        const service = this.apiProvidersFactory.getProvider(this.userService.userModel.authType);
 
-        params.set('token', this._authService.token);
-
-        return super.get(url, params);
+        return service.getUser();
     }
 
-    public getPhotos(): Observable<any> {
-        const params: URLSearchParams = new URLSearchParams(),
-            url: string = this.getUrl('/photos');
+    public getFeed(): Observable<any> {
+        const service = this.apiProvidersFactory.getProvider(this.userService.userModel.authType);
 
-        params.set('token', this._authService.token);
-
-        return super.get(url, params);
+        return service.getFeed();
     }
+
+    public logout(): Observable<any> {
+        const service = this.apiProvidersFactory.getProvider(this.userService.userModel.authType);
+
+        return service.logout();
+    }
+
 }

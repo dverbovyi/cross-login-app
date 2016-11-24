@@ -33,5 +33,11 @@
         }
       }
     ]
+  },
+  "Memory": {
+    "name": "Memory",
+    "localStorage": "",
+    "file": "in-memory.json",
+    "connector": "memory"
   }
 }

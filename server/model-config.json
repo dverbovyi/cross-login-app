@@ -13,10 +13,18 @@
       "./mixins"
     ]
   },
-  "Photo": {
+  "Facebook": {
     "dataSource": "Facebook"
   },
-  "Profile": {
-    "dataSource": "Facebook"
+  "User": {
+    "dataSource": "Memory"
+  },
+  "AccessToken": {
+    "dataSource": "Memory",
+    "public": false
+  },
+  "Record": {
+    "dataSource": "Memory",
+    "public": true
   }
 }

@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { SharedModule } from '../shared';
 import { ProfileComponent } from './components';
-import { ProfileAPIService, ProfileResolve } from './services';
+import { ProfileAPIService, ProfileResolver, FeedResolver } from './services';
 import { AuthGuard } from '../../common/guards';
 
 const ProfileRoutes: Routes = [
@@ -13,7 +13,8 @@ const ProfileRoutes: Routes = [
         pathMatch: 'full',
         canActivate: [AuthGuard],
         resolve: {
-            profile: ProfileResolve
+            profile: ProfileResolver,
+            feed: FeedResolver
         }
     }
 ];
@@ -22,7 +23,7 @@ const ProfileRoutes: Routes = [
     imports: [SharedModule, RouterModule.forChild(ProfileRoutes)],
     declarations: [ProfileComponent],
     bootstrap: [ProfileComponent],
-    providers: [ProfileAPIService, ProfileResolve]
+    providers: [ProfileAPIService, ProfileResolver, FeedResolver]
 })
 export class ProfileModule {
     constructor() { }

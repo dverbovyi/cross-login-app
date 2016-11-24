@@ -13,8 +13,9 @@ export class APIService {
         protected configService: ConfigService,
         protected http: Http,
         protected utilsService: UtilsService,
-        protected _injector: Injector) {
-        this.config = _injector.get('APIConfig') || _injector.get('EnvAPIConfig');
+        protected injector: Injector
+    ) {
+        this.config = injector.get('APIConfig') || injector.get('EnvAPIConfig');
     }
 
     public get(url: string, params?: URLSearchParams): Observable<any> {
@@ -51,6 +52,17 @@ export class APIService {
         return this.http.delete(_url)
             .map(this.extractData.bind(this))
             .catch(this.handleError.bind(this));
+    }
+
+    public sendMappedRequest(method: string, url: string, mapper: Function, params?: any): Observable<any> {
+        const _method: string = method.toLowerCase();
+        
+        return Observable.create(observer => {
+            this[_method].call(this, url, params).subscribe(res=> {
+                observer.next(mapper(res));
+                observer.complete();
+            });
+        });
     }
 
     protected extractData(res: any): any {

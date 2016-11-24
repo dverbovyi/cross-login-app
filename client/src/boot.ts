@@ -7,14 +7,16 @@ import { ConfigService } from './common/services/config.service';
 
 import './assets/styles/style.scss';
 
-function RunApplication(): Promise<NgModuleRef<AppModule>> {
+function RunApplication(): void {
 
   const injector = ReflectiveInjector.resolveAndCreate([ConfigService]),
     service = injector.get(ConfigService);
 
-  return service.load().then((config: any) => {
-    return platformBrowserDynamic([{provide: 'APIConfig', useValue: config }]).bootstrapModule(AppModule);
-  });
+  service.load()
+    .then((config: any) => {
+      platformBrowserDynamic([{ provide: 'APIConfig', useValue: config }]).bootstrapModule(AppModule);
+    })
+    .catch(console.error);
 }
 
-RunApplication().catch(err => console.error(err));
+RunApplication();

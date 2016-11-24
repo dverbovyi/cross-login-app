@@ -1,54 +1,18 @@
-import { Injectable, Injector } from '@angular/core';
-import { Http, Headers, RequestOptionsArgs } from '@angular/http';
-import { Observable, BehaviorSubject } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 
-import { UtilsService, APIService, ConfigService, AuthService } from '../../../common/services';
-import { ICredentials } from '../interfaces';
+import { APIProvidersFactory } from '../../../common/services';
+import { IAPIProvider } from '../../../common/interfaces';
 
 @Injectable()
-export class LoginAPIService extends APIService {
+export class LoginAPIService {
+    private apiProvider: IAPIProvider;
 
-    constructor(
-        protected configService: ConfigService,
-        protected http: Http,
-        protected utilsService: UtilsService,
-        protected _injector: Injector,
-        private _authService: AuthService
-    ) {
-        super(configService, http, utilsService, _injector);
-    }
+    constructor(private apiProvidersFactory: APIProvidersFactory) { }
 
-    public login(body: ICredentials): Promise<any> {
-        return new Promise((resolve, reject) => {
-            const url: string = this.getUrl('login');
+    public login(authType: number, body: any): Observable<any> {
+        this.apiProvider = this.apiProvidersFactory.getProvider(authType);
 
-            this.subscribtions[url] = super.post(url, body).subscribe((res) => {
-                resolve(res);
-            }, reject);
-        });
-    }
-
-    public loginWithFaceBook(): Promise<any> {
-        return new Promise((resolve, reject) => {
-            FB.login((res) => {
-                console.log(res)
-                if (res.status !== 'connected')
-                    return reject();
-
-                this._authService.token = res.authResponse.accessToken;
-
-                resolve(res);
-            }, {
-                scope: 'public_profile,user_photos'
-            });
-        });
-    }
-
-    public logout(): Promise<any> {
-        return new Promise((resolve, reject) => {
-            super.post(this.getUrl('logout')).subscribe((res) => {
-                resolve(res);
-            }, reject);
-        });
+        return this.apiProvider.login(body);
     }
 }

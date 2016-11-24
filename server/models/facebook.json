@@ -1,6 +1,6 @@
 {
-  "name": "Profile",
-  "plural": "Profile",
+  "name": "Facebook",
+  "plural": "Facebook",
   "base": "Model",
   "idInjection": true,
   "options": {
