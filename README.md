@@ -1,5 +1,8 @@
 # cross-login-app
-Integration with third-parties (Facebook, Twitter) using Loopback NodeJS Framework and loopback rest-connector
+Test Login app using third-party API (Facebook, Twitter) and buit-in Loopback User Model
+
+*Technologies used: Loopback NodeJS Framework, Angular 2, TypeScript, Webpack*
+
 
 
 ## Setup
@@ -15,10 +18,6 @@ Integration with third-parties (Facebook, Twitter) using Loopback NodeJS Framewo
 	npm start
   
 API available on [http://localhost:8080/explorer]()
-  
-To get the facebook token use [Facebook API explorer](https://developers.facebook.com/tools/explorer/)
-
-Specify `user_photos` permission for token
 
 ### Client
 	cd client
