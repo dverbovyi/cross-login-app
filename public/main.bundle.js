@@ -20203,8 +20203,8 @@ var BuiltInAPIProvider = (function (_super) {
         });
     };
     BuiltInAPIProvider.prototype.logout = function () {
-        var url = this.getUrl("Users/logout?access_token=" + this.userService.userModel.token);
-        return _super.prototype.post.call(this, url);
+        var url = this.getUrl('users'), userId = this.userService.userModel.userId;
+        return _super.prototype.delete.call(this, url, userId + "/accessTokens");
     };
     BuiltInAPIProvider.prototype.getUser = function () {
         var userId = this.userService.userModel.userId;

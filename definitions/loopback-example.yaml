@@ -1,5 +1,5 @@
 paths:
-  /Facebook/feed:
+  /Facebook/photos:
     get:
       tags:
         - Facebook
@@ -667,6 +667,28 @@ paths:
       responses:
         '204':
           description: Request was successful
+      deprecated: false
+  '/Users/{id}/records':
+    get:
+      tags:
+        - User
+      operationId: User.records
+      parameters:
+        - name: userId
+          in: query
+          required: false
+          type: number
+          format: double
+      responses:
+        '200':
+          description: Request was successful
+          schema:
+            type: object
+            properties:
+              records:
+                type: array
+                items:
+                  type: object
       deprecated: false
   /Records:
     post:

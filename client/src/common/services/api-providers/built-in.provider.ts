@@ -37,9 +37,10 @@ export class BuiltInAPIProvider extends APIService implements IAPIProvider {
     }
 
     public logout(): Observable<any> {
-        const url: string = this.getUrl(`Users/logout?access_token=${this.userService.userModel.token}`);
+        const url: string = this.getUrl('users'),
+            userId: number = this.userService.userModel.userId;
 
-        return super.post(url);
+        return super.delete(url, `${userId}/accessTokens`);
     }
 
     public getUser(): Observable<any> {
