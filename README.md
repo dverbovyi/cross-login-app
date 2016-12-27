@@ -1,5 +1,5 @@
 # cross-login-app
-Test Login app using third-party API (Facebook) and buit-in Loopback User Model
+Test Login app using third-party API (Facebook) and built-in Loopback User Model
 
 *Technologies used: Loopback NodeJS Framework, Angular 2, TypeScript, Webpack*
 
