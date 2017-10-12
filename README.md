@@ -17,7 +17,7 @@ Test Login app using third-party API (Facebook) and built-in Loopback User Model
 
 	npm start
   
-API available on [http://localhost:8080/explorer]()
+Swagger API documentation available at [http://localhost:8080/explorer]()
 
 ### Client
 	cd client
